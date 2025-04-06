@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>模组下载</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+        }
+
+        .mods-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            width: 90%;
+            max-width: 1200px;
+            margin-bottom: 20px;
+        }
+
+        .download-btn {
+            padding: 15px 30px;
+            font-size: 1em;
+            background: #1890ff;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .text-container {
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        .hover-target {
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .hover-target:hover {
+            color: #1890ff;
+        }
+
+        .warning-message {
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            width: 100%;
+            font-size: 0.95em;
+        }
+
+        .warning-message a {
+            color: #b71c1c;
+            text-decoration: underline;
+            margin: 0 8px;
+            transition: color 0.3s;
+        }
+
+        .warning-message a:hover {
+            color: #ff1744;
+        }
+    </style>
+</head>
+<body>
+    <div class="mods-grid">
+        <div class="warning-message">
+            有两个模组因文件过大无法下载，点击这两个链接，去第三方(modrinth)手动下载：
+            <a href="https://modrinth.com/mod/timeless-and-classics-zero/version/VIAwq0sR" target="_blank">TaCZ</a>
+            <a href="https://modrinth.com/mod/yes-steve-model/version/v3OUEvon" target="_blank">Yes Steve Model</a>
+        </div>
+        <button class="download-btn" id="downloadAll">下载全部模组</button>
+    </div>
+
+    <div class="text-container">
+        一键下载
+        <span class="hover-target" id="dynamicText">全部模组</span>
+    </div>
+
+    <script>
+        const dynamicText = document.getElementById('dynamicText');
+        const originalText = '全部模组';
+        const hoverText = '三角洲行动';
+
+        dynamicText.addEventListener('mouseover', () => {
+            dynamicText.textContent = hoverText;
+        });
+
+        dynamicText.addEventListener('mouseout', () => {
+            dynamicText.textContent = originalText;
+        });
+
+        const downloadUrls = [
+            "[1.20.1]%20SecurityCraft%20v1.9.12.jar",
+            "[Iron的法术与魔法书]%20irons_spellbooks-1.20.1-3.4.0.8.jar",
+            "ars_nouveau-1.20.1-4.12.6-all.jar",
+            "caelus-forge-3.2.0+1.20.1.jar",
+            "curios-forge-5.12.1+1.20.1.jar",
+            "epicfight-forge-20.9.7-1.20.1.jar",
+            "FarmersDelight-1.20.1-1.2.7.jar",
+            "geckolib-forge-1.20.1-4.7.1.2.jar",
+            "immersive_aircraft-1.2.2+1.20.1-forge.jar",
+            "Incendium_1.20.x_v5.3.5.jar",
+            "lostcities-1.20-7.3.6.jar",
+            "man_of_many_planes-0.2.0+1.20.1-forge.jar",
+            "mcef-forge-2.1.6-1.20.1.jar",
+            "Nullscape_1.20.x_v1.2.8.jar",
+            "player-animation-lib-forge-1.0.2-rc1+1.20%20(2).jar",
+            "sword_soaring-forge1.20.1-1.11.7for_modpack.jar",
+            "Terralith_1.20.x_v2.5.4.jar",
+            "webdisplays-2.0.2-1.20.1.jar"
+        ];
+
+        document.getElementById('downloadAll').addEventListener('click', () => {
+            downloadUrls.forEach(url => {
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = url.split('/').pop();
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            });
+        });
+    </script>
+</body>
+</html>
